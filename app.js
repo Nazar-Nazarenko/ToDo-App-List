@@ -24,7 +24,6 @@ function getFromServer() {
       li.appendChild(t);
     document.getElementById("myUl").appendChild(li);
   }});
-  
 }
 
 function newElement() {
