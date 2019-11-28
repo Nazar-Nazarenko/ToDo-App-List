@@ -61,7 +61,7 @@ h1 {
   padding-right: 70px;
 }
 .header {
-  background-color: rgba(255, 0, 0, 0.7);
+	background: linear-gradient(#9198e5, #e66465);
 	width: 100%;
 	text-align: center;
 	padding-bottom: 5px;
@@ -118,6 +118,8 @@ li {
 	cursor: pointer;
 	background-color: #f0f0f5;
 	position: relative;
+	word-spacing: 40px;
+  opacity: 1;
 }
 li:nth-child(odd) {
 	background-color: white;
@@ -127,13 +129,15 @@ li:hover {
 }
 li.checked {
 	background: #888;
-	color: black;
+	color: rgba(255, 255, 255, 0.8);
 	text-decoration: line-through;
+	opacity: 0.6;
+	transition: 0.6s;
 }
 li.checked::before {
 	content: '';
 	position: absolute;
-	border-color: black;
+	border-color: white;
 	border-style: solid;
 	border-width: 0 2px 2px 0;
 	left: 7px;
