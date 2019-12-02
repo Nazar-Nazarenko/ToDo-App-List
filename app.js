@@ -12,6 +12,7 @@ function createCloseButton() {
   return span;
 }
 
+
 function newElement() {
   let li = document.createElement('li');
   let inputValue = document.getElementById("myInput").value;
@@ -30,7 +31,6 @@ list.addEventListener('click', function(ev) {
   if(ev.target.tagName === 'LI') {
     ev.target.classList.toggle('checked');
   }
-
 
 }, false);
 
@@ -51,11 +51,9 @@ function getFromServer() {
       let id = document.createTextNode(inputId);
       let value = document.createTextNode(inputValue);
       let date = document.createTextNode(inputDate);
-      let starred = document.createTextNode(inputStarred);
       li.appendChild(id);
       li.appendChild(value);
       li.appendChild(date);
-      li.appendChild(starred);
       li.appendChild(createCloseButton());
       document.getElementById("myUl").appendChild(li);
     }});
