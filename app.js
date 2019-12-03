@@ -44,21 +44,21 @@ function getFromServer() {
   .then(responseJson => {
     for (let i = 0; i < responseJson.length; i++) {
       let li = document.createElement('li');
-      let inputId = responseJson[i].id;
+    //  let inputId = responseJson[i].id;
       let inputValue = responseJson[i].title;
       let inputDate = responseJson[i].due_date;
       let inputStarred = responseJson[i].starred;
-      let id = document.createTextNode(inputId);
+    //  let id = document.createTextNode(inputId);
       let idElement = document.createElement('span');
       idElement.className = "title";
-      idElement.appendChild(id);
+      //idElement.appendChild(id);
       let value = document.createTextNode(inputValue);
       let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
       let dateElement = document.createTextNode(date);
       let dateElementFormat = document.createElement('span');
       dateElementFormat.className = "date";
       dateElementFormat.appendChild(dateElement);
-      li.appendChild(idElement);
+      //li.appendChild(idElement);
       li.appendChild(value);
       li.appendChild(dateElementFormat);
       li.appendChild(createCloseButton());
