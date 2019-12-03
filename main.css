@@ -186,7 +186,6 @@ li.checked::before {
 	}
 	.addBtn {
 		width: 20%;
-		margin-right: 15px;
 	}
 	.close {
 		right: 0;
