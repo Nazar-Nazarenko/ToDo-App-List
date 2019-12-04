@@ -186,12 +186,21 @@ li.checked::before {
 		font-size: 2em;
 	}
 	#myUl {
-		font-size: 1.2em;
-    margin-left: -30px;
+		font-size: 1.3em;
+    margin-left: -55px;
+	}
+	#myInput {
+		width: 80%;
+	}
+	.header {
+		margin-left: 40px;
+	}
+	h1 {
+		margin-left: -80px;
 	}
 	.addBtn {
 		width: 20%;
-
+		right: 40px;
 	}
 	.close {
 		right: 0;
