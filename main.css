@@ -187,7 +187,7 @@ li.checked::before {
 	}
 	#myUl {
 		font-size: 1.3em;
-    margin-left: -55px;
+    margin-left: -45px;
 	}
 	#myInput {
 		width: 80%;
@@ -200,7 +200,7 @@ li.checked::before {
 	}
 	.addBtn {
 		width: 20%;
-		right: 40px;
+		right: 25px;
 	}
 	.close {
 		right: 0;
