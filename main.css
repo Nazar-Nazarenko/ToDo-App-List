@@ -46,7 +46,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 	box-sizing: border-box;
 	align-items: center;
-	background-color: rgba(230, 242, 255, 0.9);
+	background-color: rgba(89, 0, 179, 0.8);
 }
 
 h1 {
@@ -55,7 +55,7 @@ h1 {
   color: #9198e5;
   margin-top: 20px;
 	padding-bottom: 15px;
-	text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+	text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.9);
 }
 .enterTask {
   display: flex;
@@ -64,7 +64,7 @@ h1 {
   padding: 0 10px;
 }
 .header {
-	background-color: rgba(230, 242, 255, 0.5);
+	background-color: rgba(89, 0, 179, 0);
 	width: 100%;
 	text-align: center;
 	padding-bottom: 5px;
@@ -74,6 +74,11 @@ input {
 	border: none;
 	padding-left: 5px;
 	font-family: 'Josefin Sans', sans-serif;
+}
+.forInput {
+	display: flex;
+	justify-content: center;
+	width: 100%;
 }
 #myInput {
   width: 100%;
@@ -85,7 +90,7 @@ input {
   border-radius: 50%;
 	margin-top: 30px;
   color: rgba(255, 255, 255, 0.7);
-  background-image: linear-gradient(#e66465, #9198e5);
+  background-image: linear-gradient(#66ccff, #9198e5);
   width: 5%;
 	text-align: center;
 	vertical-align: bottom;
@@ -99,14 +104,14 @@ input {
 	right: 20px;
 }
 .addBtn:hover {
-  box-shadow: inset 0 0 12px 3px rgba(99, 99, 156, 0.5);
+  box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 0.7);
-  text-shadow: 1px 2px 4px white;
+  text-shadow: 3px 4px 5px black;
 }
 .addBtn:active {
-  box-shadow: inset 0 0 12px 3px rgba(99, 99, 156, 0.9);
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 1px 2px 4px black;
+  box-shadow: inset 0 0 12px 3px rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: 3px 4px 7px white;
   font-weight: 600;
 }
 #myUl {
@@ -129,7 +134,7 @@ li {
 	color: rgba(0, 0, 0, 0.7);
 	border-radius: 5px;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-	box-shadow: 2px 3px 3px rgba(26, 136, 255, 0.5);
+	box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.5);
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
@@ -139,10 +144,10 @@ li:hover {
 	background-color: #ddd;
 }
 li.checked {
-	color: rgba(255, 255, 255, 0.8);
+	color: rgba(0, 0, 0, 0.2);
 	text-decoration: line-through;
 	opacity: 0.6;
-	transition: 0.6s;
+	transition: 0.5s;
 	background-color: #b3b3ff;
 }
 
@@ -186,6 +191,7 @@ li.checked::before {
 	}
 	.addBtn {
 		width: 20%;
+
 	}
 	.close {
 		right: 0;

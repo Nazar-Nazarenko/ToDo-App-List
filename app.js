@@ -21,9 +21,22 @@ function newElement() {
   li.appendChild(createCloseButton());
   if (inputValue === "") {
     alert("Field can`t be empty!")
-  }else{
+  } else{
     document.getElementById("myUl").appendChild(li);
   }
+  clearButtons();
+}
+
+document.getElementById("myInput").addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    newElement();
+    clearButtons();
+  }
+});
+
+function clearButtons() {
+  const element = document.getElementById("myInput");
+  element.value = '';
 }
 
 let list = document.querySelector('ul');
@@ -42,23 +55,19 @@ function getFromServer() {
   fetch('https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks')
   .then(response => response.json())
   .then(responseJson => {
-    for (let i = 0; i < responseJson.length; i++) {
+    for (const item of responseJson) {
       let li = document.createElement('li');
-    //  let inputId = responseJson[i].id;
-      let inputValue = responseJson[i].title;
-      let inputDate = responseJson[i].due_date;
-      let inputStarred = responseJson[i].starred;
-    //  let id = document.createTextNode(inputId);
+      let inputValue = item.title;
+      let inputDate = item.due_date;
+      let inputStarred = item.starred;
       let idElement = document.createElement('span');
       idElement.className = "title";
-      //idElement.appendChild(id);
       let value = document.createTextNode(inputValue);
       let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
       let dateElement = document.createTextNode(date);
       let dateElementFormat = document.createElement('span');
       dateElementFormat.className = "date";
       dateElementFormat.appendChild(dateElement);
-      //li.appendChild(idElement);
       li.appendChild(value);
       li.appendChild(dateElementFormat);
       li.appendChild(createCloseButton());
