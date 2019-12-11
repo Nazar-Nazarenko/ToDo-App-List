@@ -28,15 +28,13 @@ function newElement() {
   } else{
     document.getElementById("myUl").appendChild(li);
   }
-  clearButtons();
   postToServer(document.getElementById("myInput").value);
+
 }
 
 document.getElementById("myInput").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     newElement();
-    clearButtons();
-    postToServer(document.getElementById("myInput").value);
   }
 });
 
@@ -81,6 +79,7 @@ function getFromServer() {
       document.getElementById("myUl").appendChild(li);
     }
   });
+  clearButtons();
 }
 
 function postToServer(inputValue) {
@@ -112,6 +111,7 @@ async function postData(url = '', data = {}) {
     referrer: 'no-referrer',
     body: JSON.stringify(data)
   });
+  clearButtons();
   return await response.json();
 }
 
