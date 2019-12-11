@@ -1,3 +1,5 @@
+const apiURL = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1';
+
 function createCloseButton() {
   let span = document.createElement("span");
   let txt = document.createTextNode("\u00D7");
@@ -6,8 +8,9 @@ function createCloseButton() {
 
   span.addEventListener('click', function() {
     let div = this.parentElement;
+    const id = div.getAttribute('data-id');
     div.style.display = "none";
-    deleteFromServer();
+    deleteFromServer(id);
   });
 
   return span;
@@ -26,14 +29,14 @@ function newElement() {
     document.getElementById("myUl").appendChild(li);
   }
   clearButtons();
-  postToServer();
+  postToServer(document.getElementById("myInput").value);
 }
 
 document.getElementById("myInput").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     newElement();
     clearButtons();
-    postToServer();
+    postToServer(document.getElementById("myInput").value);
   }
 });
 
@@ -60,6 +63,7 @@ function getFromServer() {
   .then(responseJson => {
     for (const item of responseJson) {
       let li = document.createElement('li');
+      li.setAttribute('data-id', item.id);
       let inputValue = item.title;
       let inputDate = item.due_date;
       let inputStarred = item.starred;
@@ -79,22 +83,24 @@ function getFromServer() {
   });
 }
 
-function postToServer() {
+function postToServer(inputValue) {
   try {
     const data = postData(
-      'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks', {
-      "due_date": "2019-11-05T05:35:38.113Z",
-      "title": "foo bar title",
+      '/tasks', {
+      "due_date": new Date().toLocaleString(),
+      "title": inputValue,
       "completed": false,
-      "starred": false });
+      "starred": false }).then(result => {
+        console.log(result);
+      });
     console.log(JSON.stringify(data));
   } catch (error) {
     console.error(error);
   }
 }
 
-async function postData(url = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks', data = {}) {
-  const response = await fetch(url, {
+async function postData(url = '', data = {}) {
+  const response = await fetch(apiURL + url, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -113,9 +119,10 @@ async function postData(url = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v
 
 function updateToServer() {
   try {
-    const data = putData('https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks/12', {
-      "due_date": "2019-11-05T05:35:38.113Z",
-      "title": "updated title",
+    const data = putData(
+      '/tasks/12', {
+      "due_date": new Date().toLocaleString(),
+      "title": inputValue,
       "completed": false,
       "starred": false
     });
@@ -125,8 +132,8 @@ function updateToServer() {
   }
 }
 
-async function putData(url = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks/12', data = {}) {
-  const response = await fetch(url, {
+async function putData(url = '', data = {}) {
+  const response = await fetch(apiURL + url, {
     method: 'PUT',
     mode: 'cors',
     cache: 'no-cache',
@@ -144,17 +151,19 @@ async function putData(url = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1
 
 
 
-function deleteFromServer() {
+function deleteFromServer(id) {
   try {
-    const data = deleteData('https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks/12');
+    const data = deleteData(
+      '/tasks/' + id
+    );
     console.log(JSON.stringify(data));
   } catch (error) {
     console.error(error);
   }
 }
 
-async function deleteData(url = 'https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks/12') {
-  const response = await fetch(url, {
+async function deleteData(url = '') {
+  const response = await fetch(apiURL + url, {
     method: 'DELETE',
     mode: 'cors',
     cache: 'no-cache',
