@@ -86,12 +86,12 @@ input {
 	background-color: #ebf0fa;
 }
 .addBtn {
-  font-size: 4em;
-  border-radius: 50%;
+  font-size: 2em;
+  border-radius: 25px;
+	padding: 10px 20px;
 	margin-top: 25px;
   color: rgba(255, 255, 255, 0.7);
   background-image: linear-gradient(#66ffcc, #33cccc);
-  width: 5%;
 	text-align: center;
 	vertical-align: bottom;
 	margin-left: 3px;
@@ -122,7 +122,7 @@ input {
 	width: 90%;
 }
 li {
-	padding: 10px 50px;
+	padding: 10px 50px 10px 10px;
 	border-radius: 3px;
 	cursor: pointer;
 	position: relative;
@@ -165,20 +165,25 @@ li.checked::before {
 
 .close {
 	position: absolute;
-	right: 5px;
+	right: 0;
 	top: 0px;
 	padding: 10px 10px;
-	border-radius: 10px;
+	border-radius: 7px 25px 25px 7px;
+
 }
 .close:hover {
 	background-color: #f44336;
 	color: white;
 }
-.title {
-
+.update {
+	position: absolute;
+  right: 50px;
 }
 .date {
-
+font-size: 0.5em;
+position: relative;
+top: 10px;
+right: 30px;
 }
 
 @media (max-width: 738px) {
@@ -188,6 +193,7 @@ li.checked::before {
 	#myUl {
 		font-size: 1.3em;
     margin-left: -10px;
+		width: 100%;
 	}
 	#myInput {
 		width: 80%;
@@ -200,13 +206,17 @@ li.checked::before {
 		margin-left: -50px;
 	}
 	.addBtn {
-	width: 22%;
-	right: 40%;
+   right: 35%;
+   font-size: 1.5em;
 	}
 	.close {
 		right: 0;
 	}
+
 	.date {
-		padding-right: 25px;
+   right: -5px;
+	}
+	.update {
+		right: 25px;
 	}
 }
