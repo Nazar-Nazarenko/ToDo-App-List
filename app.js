@@ -16,12 +16,28 @@ function createCloseButton() {
   return span;
 }
 
+function updateButton() {
+  let span = document.createElement("span");
+  let txt = document.createTextNode("\u270e");
+  span.className = "update";
+  span.appendChild(txt);
+
+span.addEventListener('click', function() {
+  let div = this.parentElement;
+  const id = div.getAttribute('data-id');
+  putData(id);
+});
+
+return span;
+}
+
 
 function newElement() {
   let li = document.createElement('li');
   let inputValue = document.getElementById("myInput").value;
   let text = document.createTextNode(inputValue);
   li.appendChild(text);
+  li.appendChild(updateButton());
   li.appendChild(createCloseButton());
   if (inputValue === "") {
     alert("Field can`t be empty!")
@@ -29,7 +45,6 @@ function newElement() {
     document.getElementById("myUl").appendChild(li);
   }
   postToServer(document.getElementById("myInput").value);
-
 }
 
 document.getElementById("myInput").addEventListener("keyup", function(event) {
@@ -51,9 +66,7 @@ list.addEventListener('click', function(ev) {
 
 }, false);
 
-
-
-getFromServer();
+getFromServer ();
 
 function getFromServer() {
   fetch('https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks')
@@ -65,8 +78,6 @@ function getFromServer() {
       let inputValue = item.title;
       let inputDate = item.due_date;
       let inputStarred = item.starred;
-      let idElement = document.createElement('span');
-      idElement.className = "title";
       let value = document.createTextNode(inputValue);
       let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
       let dateElement = document.createTextNode(date);
@@ -75,12 +86,14 @@ function getFromServer() {
       dateElementFormat.appendChild(dateElement);
       li.appendChild(value);
       li.appendChild(dateElementFormat);
+      li.appendChild(updateButton());
       li.appendChild(createCloseButton());
       document.getElementById("myUl").appendChild(li);
     }
   });
   clearButtons();
 }
+
 
 function postToServer(inputValue) {
   try {
