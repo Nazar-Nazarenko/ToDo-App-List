@@ -52,10 +52,10 @@ body {
 h1 {
   font-size: 3em;
   text-align: center;
-  color: #00b38f;
-  margin-top: 20px;
+  color: rgb(128, 223, 255);
+  margin-top: 25px;
 	padding-bottom: 15px;
-	text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.9);
+	text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .enterTask {
   display: flex;
@@ -67,7 +67,10 @@ h1 {
 	width: 100%;
 	text-align: center;
 	padding-bottom: 5px;
-	margin-top: 50px;
+	position: fixed;
+	top: 0;
+	z-index: 6;
+	background-color: rgb(240, 240, 245);
 }
 input {
 	border: none;
@@ -81,17 +84,19 @@ input {
 }
 #myInput {
   width: 100%;
-  font-size: 2em;
+  font-size: 1.7em;
+	padding-bottom: 6px;
+	font-weight: 300;
   border-radius: 25px;
-	background-color: #ebf0fa;
+	background-color: white;
 }
 .addBtn {
-  font-size: 2em;
-  border-radius: 25px;
-	padding: 10px 20px;
+  font-size: 1.5em;
+  border-radius: 50%;
+	width: 2%;
 	margin-top: 25px;
   color: rgba(255, 255, 255, 0.7);
-  background-image: linear-gradient(#66ffcc, #33cccc);
+  background-image: linear-gradient(#808080, #d1d1e0);
 	text-align: center;
 	vertical-align: bottom;
 	margin-left: 3px;
@@ -99,10 +104,11 @@ input {
   font-weight: 300;
 	padding-bottom: 3px;
 	cursor: pointer;
-	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  position: fixed;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  position: absolute;
 	z-index: 3;
-	bottom: 10px;
+	top: 75px;
+	right: 35px;
 }
 .addBtn:hover {
   box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
@@ -115,15 +121,20 @@ input {
   text-shadow: 3px 4px 7px white;
   font-weight: 600;
 }
+::placeholder {
+	color: #5959a6;
+	opacity: 0.3;
+}
 #myUl {
 	display: flex;
 	flex-flow: column;
 	font-size: 1.7em;
 	width: 90%;
+	position: relative;
+	top: 200px;
 }
 li {
 	padding: 10px 50px 10px 10px;
-	border-radius: 3px;
 	cursor: pointer;
 	position: relative;
 	word-spacing: 10px;
@@ -177,7 +188,13 @@ li.checked::before {
 }
 .update {
 	position: absolute;
-  right: 50px;
+  right: 48px;
+	bottom: 2px;
+	padding: 7px 5px;
+	border-radius: 5px;
+}
+.update:hover {
+	background-color: #00e68a;
 }
 .date {
 font-size: 0.5em;
@@ -189,25 +206,25 @@ right: 30px;
 @media (max-width: 738px) {
 	h1 {
 		font-size: 2em;
+		margin-right: -40px;
 	}
 	#myUl {
 		font-size: 1.3em;
     margin-left: -10px;
 		width: 100%;
 	}
-	#myInput {
-		width: 80%;
-		margin-left: 15px;
-	}
+
 	.header {
-		margin-left: 40px;
+		margin-left: 0px;
 	}
 	h1 {
 		margin-left: -50px;
 	}
 	.addBtn {
-   right: 35%;
+   right: 8px;
    font-size: 1.5em;
+	 width: 10%;
+	 top: 55px;
 	}
 	.close {
 		right: 0;
@@ -219,4 +236,5 @@ right: 30px;
 	.update {
 		right: 25px;
 	}
+
 }
