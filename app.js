@@ -32,77 +32,54 @@ return span;
 }
 
 
-function newElement() {
-  let li = document.createElement('li');
-  let inputValue = document.getElementById("myInput").value;
-  let text = document.createTextNode(inputValue);
-  li.appendChild(text);
-  li.appendChild(updateButton());
-  li.appendChild(createCloseButton());
-  if (inputValue === "") {
-    alert("Field can`t be empty!")
-  } else{
-    document.getElementById("myUl").appendChild(li);
-  }
-  postToServer(document.getElementById("myInput").value);
-}
-
-document.getElementById("myInput").addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    newElement();
-  }
-});
-
 function clearButtons() {
   const element = document.getElementById("myInput");
   element.value = '';
 }
 
-let list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if(ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
 
-}, false);
-
-getFromServer ();
+function renderTask(item) {
+  let li = document.createElement('li');
+  li.setAttribute('data-id', item.id);
+  let inputValue = item.title;
+  let inputDate = item.due_date;
+  let inputStarred = item.starred;
+  let value = document.createTextNode(inputValue);
+  let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
+  let dateElement = document.createTextNode(date);
+  let dateElementFormat = document.createElement('span');
+  dateElementFormat.className = "date";
+  dateElementFormat.appendChild(dateElement);
+  li.appendChild(value);
+  li.appendChild(dateElementFormat);
+  li.appendChild(updateButton());
+  li.appendChild(createCloseButton());
+  document.getElementById("myUl").appendChild(li);
+}
 
 function getFromServer() {
   fetch('https://5d4908fd2d59e50014f20f15.mockapi.io/api/v1/tasks')
   .then(response => response.json())
   .then(responseJson => {
     for (const item of responseJson) {
-      let li = document.createElement('li');
-      li.setAttribute('data-id', item.id);
-      let inputValue = item.title;
-      let inputDate = item.due_date;
-      let inputStarred = item.starred;
-      let value = document.createTextNode(inputValue);
-      let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
-      let dateElement = document.createTextNode(date);
-      let dateElementFormat = document.createElement('span');
-      dateElementFormat.className = "date";
-      dateElementFormat.appendChild(dateElement);
-      li.appendChild(value);
-      li.appendChild(dateElementFormat);
-      li.appendChild(updateButton());
-      li.appendChild(createCloseButton());
-      document.getElementById("myUl").appendChild(li);
+      renderTask(item);
     }
   });
   clearButtons();
 }
 
 
-function postToServer(inputValue) {
+function postToServer() {
+  let inputValue = document.getElementById("myInput").value;
+
   try {
     const data = postData(
       '/tasks', {
-      "due_date": new Date().toLocaleString(),
-      "title": inputValue,
-      "completed": false,
-      "starred": false }).then(result => {
+      due_date: new Date().toLocaleString(),
+      title: inputValue,
+      completed: false,
+      starred: false }).then(result => {
+        renderTask(result)
         console.log(result);
       });
     console.log(JSON.stringify(data));
@@ -189,3 +166,21 @@ async function deleteData(url = '') {
   });
   return await response.json();
 }
+
+// calling function herrer
+getFromServer ();
+
+document.getElementById("myInput").addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    postToServer()
+  }
+});
+
+let list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if(ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+
+}, false);
+
