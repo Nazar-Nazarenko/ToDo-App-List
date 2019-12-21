@@ -22,13 +22,19 @@ function updateButton() {
   span.className = "update";
   span.appendChild(txt);
 
-span.addEventListener('click', function() {
-  let div = this.parentElement;
-  const id = div.getAttribute('data-id');
-  putData(id);
-});
+  span.addEventListener('click', function() {
+    let div = this.parentElement;
+    const id = div.getAttribute('data-id');
+    let edit = this.parentElement;
+    console.log('edit', edit);
+    let edition = edit.getElementsByClassName('task')[0];
+    console.log('edition', edition);
+    edition.disabled = false;
 
-return span;
+
+  });
+
+  return span;
 }
 
 
@@ -42,15 +48,19 @@ function renderTask(item) {
   let li = document.createElement('li');
   li.setAttribute('data-id', item.id);
   let inputValue = item.title;
+  let value = document.createTextNode(inputValue);
+  let valueFormat = document.createElement('input');
+  valueFormat.className = 'task';
+  valueFormat.disabled = true;
+  valueFormat.setAttribute('value', item.title);
   let inputDate = item.due_date;
   let inputStarred = item.starred;
-  let value = document.createTextNode(inputValue);
   let date = moment(inputDate).format('YYYY-MM-DD HH:mm:ss');
   let dateElement = document.createTextNode(date);
   let dateElementFormat = document.createElement('span');
   dateElementFormat.className = "date";
   dateElementFormat.appendChild(dateElement);
-  li.appendChild(value);
+  li.appendChild(valueFormat);
   li.appendChild(dateElementFormat);
   li.appendChild(updateButton());
   li.appendChild(createCloseButton());
@@ -183,4 +193,3 @@ list.addEventListener('click', function(ev) {
   }
 
 }, false);
-
