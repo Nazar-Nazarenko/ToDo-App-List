@@ -12,7 +12,6 @@ function createCloseButton() {
     div.style.display = "none";
     deleteFromServer(id);
   });
-
   return span;
 }
 
@@ -27,14 +26,36 @@ function updateButton() {
     const id = div.getAttribute('data-id');
     let edit = this.parentElement;
     console.log('edit', edit);
+    let hideButton = edit.getElementsByClassName('update')[0];
+    console.log('hideButton', hideButton);
+    hideButton.style.visibility = 'hidden';
+    let visibleButton = edit.getElementsByClassName('save')[0];
+    console.log("visibleButton", visibleButton);
+    visibleButton.style.visibility = 'visible';
     let edition = edit.getElementsByClassName('task')[0];
     console.log('edition', edition);
-    edition.disabled = false;
-
-
+    edition.disabled =  false;
   });
 
   return span;
+}
+
+function saveButton() {
+  let spanSave = document.createElement("span");
+  let txt = document.createTextNode("done");
+  spanSave.className = "save";
+  spanSave.appendChild(txt);
+  spanSave.style.visibility = 'hidden';
+
+  spanSave.addEventListener('click', function() {
+    let div = this.parentElement;
+    const id = div.getAttribute('data-id');
+    let save = this.parentElement;
+    console.log('save', save);
+    let edition = save.getElementsByClassName('task')[0];
+    console.log('edition', edition);
+  });
+  return spanSave;
 }
 
 
@@ -60,10 +81,15 @@ function renderTask(item) {
   let dateElementFormat = document.createElement('span');
   dateElementFormat.className = "date";
   dateElementFormat.appendChild(dateElement);
+  let circle = document.createElement('span');
+  let circleItem = document.createTextNode('\u26AA');
+  circleItem.className = 'circle';
+  li.appendChild(circleItem);
   li.appendChild(valueFormat);
   li.appendChild(dateElementFormat);
   li.appendChild(updateButton());
   li.appendChild(createCloseButton());
+  li.appendChild(saveButton());
   document.getElementById("myUl").appendChild(li);
 }
 
@@ -112,6 +138,7 @@ async function postData(url = '', data = {}) {
     body: JSON.stringify(data)
   });
   clearButtons();
+
   return await response.json();
 }
 
@@ -145,6 +172,7 @@ async function putData(url = '', data = {}) {
     referrer: 'no-referrer',
     body: JSON.stringify(data)
   });
+  saveButton();
   return await response.json();
 }
 
@@ -182,6 +210,7 @@ getFromServer ();
 
 document.getElementById("myInput").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
+    saveButton();
     postToServer()
   }
 });

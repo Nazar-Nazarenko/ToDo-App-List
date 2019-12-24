@@ -71,6 +71,7 @@ h1 {
 	top: 0;
 	z-index: 6;
 	background-color: rgb(240, 240, 245);
+	opacity: 0.97;
 }
 input {
 	border: none;
@@ -107,8 +108,8 @@ input {
 	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
 	z-index: 3;
-	top: 75px;
-	right: 35px;
+	top: 80px;
+	right: 25px;
 }
 .addBtn:hover {
   box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
@@ -200,26 +201,46 @@ li.checked::before {
 font-size: 0.5em;
 position: relative;
 top: 10px;
-right: 30px;
+right: 20px;
+margin-left: 10px;
 }
 .task {
 	font-size: 1em;
-	width: 90%;
+	width: 80%;
 	border-radius: 20px;
 	background-color: white;
+	padding-left: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 input {
 	outline: none;
 }
-
+.save {
+	font-size: 0.9em;
+	text-shadow: 1px 1px 2px rgba(0, 204, 255, 0.5);
+	transition: 0.5s;
+}
+.save:hover {
+background-color: #00e68a;
+border-radius: 5px;
+}
+.circle {
+position: absolute;
+left: 10px;
+font-family: font-awesome;
+}
 @media (max-width: 738px) {
 	h1 {
 		font-size: 2em;
 		margin-right: -40px;
 	}
+	.save {
+
+	}
 	#myUl {
 		font-size: 1.3em;
-    margin-left: -10px;
+    margin-left: -20px;
 		width: 100%;
 	}
 
