@@ -52,8 +52,16 @@ function saveButton() {
     const id = div.getAttribute('data-id');
     let save = this.parentElement;
     console.log('save', save);
-    let edition = save.getElementsByClassName('task')[0];
-    console.log('edition', edition);
+    let editValue = save.getElementsByClassName('task')[0];
+    editValue.disabled = true;
+    spanSave.style.visibility = 'hidden';
+    let pencil = this.parentElement;
+    let pencilVisible = pencil.getElementsByClassName('update')[0];
+    pencilVisible.style.visibility = 'visible';
+    let prepareUpdate = div.getElementsByClassName('task')[0].value;
+    console.log('prepareUpdate', prepareUpdate);
+    updateToServer(id, prepareUpdate);
+
   });
   return spanSave;
 }
@@ -68,9 +76,23 @@ function clearButtons() {
 function renderTask(item) {
   let li = document.createElement('li');
   li.setAttribute('data-id', item.id);
+  if(item.starred) {
+    li.className = 'checked';
+  }
   let inputValue = item.title;
   let value = document.createTextNode(inputValue);
   let valueFormat = document.createElement('input');
+  valueFormat.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      let saveValue = document.getElementsByClassName('task')[0];
+      saveValue.disabled = true;
+      let doneButton = document.getElementsByClassName('save')[0];
+      doneButton.style.visibility = 'hidden';
+      let pencilButton = document.getElementsByClassName('update')[0];
+      pencilButton.style.visibility = 'visible';
+      updateToServer(item.id, this.value);
+    }
+  })
   valueFormat.className = 'task';
   valueFormat.disabled = true;
   valueFormat.setAttribute('value', item.title);
@@ -111,7 +133,7 @@ function postToServer() {
   try {
     const data = postData(
       '/tasks', {
-      due_date: new Date().toLocaleString(),
+      due_date: new Date().getTime(),
       title: inputValue,
       completed: false,
       starred: false }).then(result => {
@@ -144,11 +166,12 @@ async function postData(url = '', data = {}) {
 
 
 
-function updateToServer() {
+function updateToServer(id, inputValue) {
   try {
+    console.log("new Date()", new Date().toLocaleString());
     const data = putData(
-      '/tasks/12', {
-      "due_date": new Date().toLocaleString(),
+      '/tasks/' + id, {
+      "due_date": new Date().getTime(),
       "title": inputValue,
       "completed": false,
       "starred": false
@@ -210,8 +233,7 @@ getFromServer ();
 
 document.getElementById("myInput").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
-    saveButton();
-    postToServer()
+    postToServer();
   }
 });
 

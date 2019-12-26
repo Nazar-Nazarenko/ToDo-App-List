@@ -156,10 +156,13 @@ input:hover {
 	background-color: #ddd;
 }
 li.checked {
-	color: rgba(0, 0, 0, 0.3);
-	text-decoration: line-through;
+	color: rgba(255, 0, 0, 0.5);
 	opacity: 0.6;
 	transition: 0.5s;
+}
+li.checked input {
+  color: rgba(255, 0, 0, 0.5);
+	text-decoration: line-through;	
 }
 
 li.checked::before {
@@ -219,7 +222,7 @@ input {
 .save {
 	font-size: 0.9em;
 	text-shadow: 1px 1px 2px rgba(0, 204, 255, 0.5);
-	transition: 0.5s;
+	transition: 0.3s;
 }
 .save:hover {
 background-color: #00e68a;
